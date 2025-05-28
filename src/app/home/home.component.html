@@ -23,13 +23,21 @@
 
   <div class="time-slots-section">
     <h3>Available Time Slots</h3>
-    <div class="time-slots">
-      <div class="time-slot">9:00 AM - 10:00 AM</div>
-      <div class="time-slot selected">10:00 AM - 11:00 AM</div>
-      <div class="time-slot">11:00 AM - 12:00 PM</div>
-      <div class="time-slot">12:00 PM - 1:00 PM</div>
-      <div class="time-slot">1:00 PM - 2:00 PM</div>
-      <div class="time-slot">2:00 PM - 3:00 PM</div>
+    <div *ngIf="isLoading" class="loading-spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading" class="time-slots">
+      <div *ngFor="let slot of timeSlots" 
+           class="time-slot" 
+           [class.selected]="selectedTimeSlot === slot.startTime + ' - ' + slot.endTime"
+           [class.unavailable]="!slot.isAvailable"
+           (click)="selectTimeSlot(slot)">
+        {{ slot.startTime }} - {{ slot.endTime }}
+        <span *ngIf="!slot.isAvailable" class="unavailable-text">Unavailable</span>
+      </div>
+      <div *ngIf="timeSlots.length === 0" class="no-slots">
+        No time slots available for the selected date.
+      </div>
     </div>
   </div>
 
@@ -46,7 +54,7 @@
       </div>
       <div class="booking-detail-row">
         <span class="detail-label">Time</span>
-        <span class="detail-value">10:00 AM - 11:00 AM</span>
+        <span class="detail-value">{{ selectedTimeSlot || 'Select a time slot' }}</span>
       </div>
       <div class="booking-detail-row">
         <span class="detail-label">Duration</span>
@@ -54,6 +62,10 @@
       </div>
     </div>
 
-    <button class="confirm-booking-btn">Confirm Booking</button>
+    <button class="confirm-booking-btn" 
+            [disabled]="!selectedTimeSlot" 
+            (click)="confirmBooking()">
+      Confirm Booking
+    </button>
   </div>
 </div>

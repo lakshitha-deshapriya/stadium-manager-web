@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavigationService, NavItem } from '../services/navigation.service';
+import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,13 +10,16 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+  styleUrls: ['./navigation.component.scss', './auth-buttons.scss']
 })
 export class NavigationComponent implements OnInit {
   navItems$: Observable<NavItem[]>;
   isMobileMenuOpen = false;
   
-  constructor(private navigationService: NavigationService) {
+  constructor(
+    private navigationService: NavigationService,
+    public authService: AuthService
+  ) {
     this.navItems$ = this.navigationService.navItems$;
   }
   
@@ -43,5 +47,9 @@ export class NavigationComponent implements OnInit {
     ) {
       this.isMobileMenuOpen = false;
     }
+  }
+  
+  logout(): void {
+    this.authService.logout();
   }
 }
