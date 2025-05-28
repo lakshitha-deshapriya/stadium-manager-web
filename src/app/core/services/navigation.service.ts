@@ -14,8 +14,8 @@ export class NavigationService {
   private _navItems = new BehaviorSubject<NavItem[]>([
     { label: 'Home', path: '/' },
     { label: 'Stadiums', path: '/stadiums' },
-    { label: 'Events', path: '/events' },
-    { label: 'About', path: '/about' }
+    { label: 'Bookings', path: '/bookings' },
+    { label: 'Contact', path: '/contact' }
   ]);
 
   get navItems$(): Observable<NavItem[]> {

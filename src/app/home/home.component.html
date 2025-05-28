@@ -1,27 +1,76 @@
 <div class="home-container">
-  <div class="hero-section">
-    <h1>Welcome to Stadium Manager</h1>
-    <p class="subtitle">Your comprehensive solution for stadium management</p>
-    <div class="cta-buttons">
-      <button class="btn primary">Get Started</button>
-      <button class="btn secondary">Learn More</button>
+  <h1 class="page-title">Book Your Slot</h1>
+
+  <div class="date-picker-section">
+    <mat-form-field appearance="fill">
+      <mat-label>Select a date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="calendar-section">
+    <div class="calendar-header">
+      <button class="calendar-nav-btn prev-btn">&lt;</button>
+      <h2 class="calendar-month">July 2024</h2>
+      <button class="calendar-nav-btn next-btn">&gt;</button>
+    </div>
+
+    <div class="calendar">
+      <div class="calendar-weekdays">
+        <div class="weekday">S</div>
+        <div class="weekday">M</div>
+        <div class="weekday">T</div>
+        <div class="weekday">W</div>
+        <div class="weekday">T</div>
+        <div class="weekday">F</div>
+        <div class="weekday">S</div>
+      </div>
+
+      <div class="calendar-days">
+        <div class="calendar-day" *ngFor="let i of [1, 2, 3, 4]">
+          <span class="day-number">{{i}}</span>
+        </div>
+        <div class="calendar-day selected">
+          <span class="day-number">5</span>
+        </div>
+        <div class="calendar-day" *ngFor="let i of [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]">
+          <span class="day-number">{{i}}</span>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <div class="features-section">
-    <div class="feature-card">
-      <h3>Stadium Management</h3>
-      <p>Efficiently manage all aspects of your stadium operations from a single platform.</p>
+
+  <div class="time-slots-section">
+    <h3>Available Time Slots</h3>
+    <div class="time-slots">
+      <div class="time-slot">9:00 AM - 10:00 AM</div>
+      <div class="time-slot selected">10:00 AM - 11:00 AM</div>
+      <div class="time-slot">11:00 AM - 12:00 PM</div>
+      <div class="time-slot">12:00 PM - 1:00 PM</div>
+      <div class="time-slot">1:00 PM - 2:00 PM</div>
+      <div class="time-slot">2:00 PM - 3:00 PM</div>
     </div>
-    
-    <div class="feature-card">
-      <h3>Event Scheduling</h3>
-      <p>Schedule and manage events with an intuitive and user-friendly interface.</p>
+  </div>
+
+  <div class="booking-summary-section">
+    <h3>Booking Summary</h3>
+    <div class="booking-details">
+      <div class="booking-detail-row">
+        <span class="detail-label">Date</span>
+        <span class="detail-value">July 15, 2024</span>
+      </div>
+      <div class="booking-detail-row">
+        <span class="detail-label">Time</span>
+        <span class="detail-value">10:00 AM - 11:00 AM</span>
+      </div>
+      <div class="booking-detail-row">
+        <span class="detail-label">Duration</span>
+        <span class="detail-value">1 Hour</span>
+      </div>
     </div>
-    
-    <div class="feature-card">
-      <h3>Analytics & Reporting</h3>
-      <p>Get valuable insights into your stadium's performance with detailed reports.</p>
-    </div>
+
+    <button class="confirm-booking-btn">Confirm Booking</button>
   </div>
 </div>
