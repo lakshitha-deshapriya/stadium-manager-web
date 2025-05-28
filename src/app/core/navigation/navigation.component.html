@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <a routerLink="/">Stadium Manager</a>
+    </div>
+    
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.open]="isMobileMenuOpen">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <ul class="navbar-menu" [class.open]="isMobileMenuOpen">
+      <li *ngFor="let item of navItems$ | async" class="navbar-item">
+        <a [routerLink]="item.path" 
+           routerLinkActive="active" 
+           [routerLinkActiveOptions]="{exact: item.path === '/'}"
+           (click)="isMobileMenuOpen = false">
+          <span *ngIf="item.icon" class="nav-icon">{{ item.icon }}</span>
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
