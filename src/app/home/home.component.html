@@ -2,44 +2,23 @@
   <h1 class="page-title">Book Your Slot</h1>
 
   <div class="date-picker-section">
+    <mat-form-field appearance="fill" class="venue-select">
+      <mat-label>Select venue</mat-label>
+      <mat-select [(ngModel)]="selectedVenue" (selectionChange)="onVenueChange($event)">
+        <mat-option *ngFor="let venue of venues" [value]="venue.value">
+          {{ venue.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Select a date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)" readonly>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  </div>
 
-  <div class="calendar-section">
-    <div class="calendar-header">
-      <button class="calendar-nav-btn prev-btn">&lt;</button>
-      <h2 class="calendar-month">July 2024</h2>
-      <button class="calendar-nav-btn next-btn">&gt;</button>
-    </div>
-
-    <div class="calendar">
-      <div class="calendar-weekdays">
-        <div class="weekday">S</div>
-        <div class="weekday">M</div>
-        <div class="weekday">T</div>
-        <div class="weekday">W</div>
-        <div class="weekday">T</div>
-        <div class="weekday">F</div>
-        <div class="weekday">S</div>
-      </div>
-
-      <div class="calendar-days">
-        <div class="calendar-day" *ngFor="let i of [1, 2, 3, 4]">
-          <span class="day-number">{{i}}</span>
-        </div>
-        <div class="calendar-day selected">
-          <span class="day-number">5</span>
-        </div>
-        <div class="calendar-day" *ngFor="let i of [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]">
-          <span class="day-number">{{i}}</span>
-        </div>
-      </div>
-    </div>
+    <button mat-raised-button color="primary" class="search-btn" (click)="searchAvailability()">Search</button>
   </div>
 
   <div class="time-slots-section">
@@ -58,8 +37,12 @@
     <h3>Booking Summary</h3>
     <div class="booking-details">
       <div class="booking-detail-row">
+        <span class="detail-label">Venue</span>
+        <span class="detail-value">{{ selectedVenue === 'cricket' ? 'Cricket Stadium' : 'Football Stadium' }}</span>
+      </div>
+      <div class="booking-detail-row">
         <span class="detail-label">Date</span>
-        <span class="detail-value">July 15, 2024</span>
+        <span class="detail-value">{{ selectedDate | date:'mediumDate' }}</span>
       </div>
       <div class="booking-detail-row">
         <span class="detail-label">Time</span>

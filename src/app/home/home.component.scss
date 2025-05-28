@@ -14,10 +14,26 @@
 
 .date-picker-section {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
   
   mat-form-field {
     width: 100%;
     max-width: 300px;
+  }
+
+  .venue-select {
+    min-width: 200px;
+  }
+
+  .search-btn {
+    height: 50px;
+    min-width: 100px;
+    font-weight: 500;
+    align-self: flex-start;
+    margin-top: 4px;
   }
 }
 
