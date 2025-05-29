@@ -76,6 +76,18 @@ export class HomeComponent implements OnInit {
       console.log('Venue:', this.selectedVenue);
       console.log('Date:', this.selectedDate);
       
+      // Check if user is logged in
+    //   const isLoggedIn = this.firebaseService.auth.currentUser !== null;
+    //   if (!isLoggedIn) {
+    //     this.snackBar.open('Please log in to see actual availability. Showing all slots as available.', 'Sign In', {
+    //       duration: 5000,
+    //       panelClass: ['info-snackbar']
+    //     }).onAction().subscribe(() => {
+    //       // Redirect to login page if they click the action button
+    //       window.location.href = '/login';
+    //     });
+    //   }
+      
       this.timeSlots = await this.bookingService.checkAvailability(
         this.selectedVenue, 
         this.selectedDate
